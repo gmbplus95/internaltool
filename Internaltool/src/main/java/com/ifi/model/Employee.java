@@ -8,10 +8,10 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-@Table
+@Table("employee")
 public class Employee {
 	    @PrimaryKeyColumn(
-	      name = "emp_id", 
+	      name = "pro_id", 
 	      ordinal = 0, 
 	      type = PrimaryKeyType.PARTITIONED)
 	    private UUID emp_id;
