@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.Column;
@@ -24,11 +25,8 @@ public class Project {
 		    	      type = PrimaryKeyType.CLUSTERED, 
 		    	      ordering = Ordering.ASCENDING)
 		    private UUID emp_id;
-		    @PrimaryKeyColumn(
-		    	      name = "join_time", 
-		    	      ordinal = 2, 
-		    	      type = PrimaryKeyType.CLUSTERED, 
-		    	      ordering = Ordering.ASCENDING)
+		    @Column
+		    @CreatedDate
 		    private Date join_time;
 		    @Column
 		    private String pro_name;

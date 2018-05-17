@@ -11,7 +11,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 @Table("employee")
 public class Employee {
 	    @PrimaryKeyColumn(
-	      name = "pro_id", 
+	      name = "emp_id", 
 	      ordinal = 0, 
 	      type = PrimaryKeyType.PARTITIONED)
 	    private UUID emp_id;
