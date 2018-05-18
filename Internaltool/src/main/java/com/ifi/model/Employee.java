@@ -22,6 +22,8 @@ public class Employee {
 	    @Column
 	    private String username;
 	    @Column
+	    private UUID root_id;
+	    @Column
 	    private Set<UUID> sub_id;
 	    // standard getters and setters
 		public UUID getEmp_id() {
@@ -54,15 +56,25 @@ public class Employee {
 		public void setSub_id(Set<UUID> sub_id) {
 			this.sub_id = sub_id;
 		}
-		public Employee(String emp_group, String emp_name, String username, Set<UUID> sub_id) {
+		public UUID getRoot_id() {
+			return root_id;
+		}
+		public void setRoot_id(UUID root_id) {
+			this.root_id = root_id;
+		}
+		public Employee(UUID emp_id, String emp_group, String emp_name, String username, UUID root_id,
+				Set<UUID> sub_id) {
 			super();
+			this.emp_id = emp_id;
 			this.emp_group = emp_group;
 			this.emp_name = emp_name;
 			this.username = username;
+			this.root_id = root_id;
 			this.sub_id = sub_id;
 		}
 		public Employee() {
 			super();
 		}
+		
 	}
 

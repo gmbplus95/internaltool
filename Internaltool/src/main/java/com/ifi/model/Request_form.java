@@ -51,7 +51,10 @@ public class Request_form {
 	@Column
 	private int type;
 	@Column
+	private UUID send_to;
+	@Column
 	private int status;
+	
 	public UUID getEmp_id() {
 		return emp_id;
 	}
@@ -124,9 +127,20 @@ public class Request_form {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public Request_form(UUID pro_id, UUID request_id, Date created_date, Date last_modified, String emp_name,
-			String pro_name, LocalDate from_date, LocalDate to_date, String description, int type, int status) {
+	public UUID getSend_to() {
+		return send_to;
+	}
+	public void setSend_to(UUID send_to) {
+		this.send_to = send_to;
+	}
+	public Request_form() {
 		super();
+	}
+	public Request_form(UUID emp_id, UUID pro_id, UUID request_id, Date created_date, Date last_modified,
+			String emp_name, String pro_name, LocalDate from_date, LocalDate to_date, String description, int type,
+			UUID send_to, int status) {
+		super();
+		this.emp_id = emp_id;
 		this.pro_id = pro_id;
 		this.request_id = request_id;
 		this.created_date = created_date;
@@ -137,10 +151,8 @@ public class Request_form {
 		this.to_date = to_date;
 		this.description = description;
 		this.type = type;
+		this.send_to = send_to;
 		this.status = status;
-	}
-	public Request_form() {
-		super();
 	}
 	
 	

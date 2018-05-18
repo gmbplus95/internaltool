@@ -18,6 +18,9 @@ public interface AppService {
 	List<Project> getAllProject();//lấy tất cả project
 	List<Request_form> getAllRequest();//lấy tất cả request
 	List<Request_form> getAllRequestByEmpid(UUID emp_id);//lấy tất cả request dựa vào empid
-	Employee getEmployeeByEmpid(UUID emp_id);
+	Employee getEmployeeByEmpid(UUID emp_id);		//lấy được emp dựa vào empid
+	Request_form getRequestFormBySendto(UUID send_to);//lấy request dựa vào send_to id
+	void addRequestForm(Request_form request_form);
+	void deleteRequest(Request_form request_form);
 //	Set<UUID> getListSubid(UUID emp_id);
 }
