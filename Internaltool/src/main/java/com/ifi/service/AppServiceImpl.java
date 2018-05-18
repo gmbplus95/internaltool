@@ -1,10 +1,10 @@
 package com.ifi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,6 @@ import com.ifi.repository.RequestFormRepository;
 @EnableCassandraRepositories(basePackages = "com.ifi.repository")
 @Service("AppService")
 public class AppServiceImpl implements AppService {
-	@Autowired
-	private CassandraOperations cassandraTemplate;
 	@Autowired
 	EmployeeRepository er;
 	@Autowired
@@ -75,12 +73,18 @@ public class AppServiceImpl implements AppService {
 		rfr.save(request_form);
 	}
 	@Override
-	public void deleteRequest(Request_form request_form) {
+	public void deleteRequest(UUID emp_id,UUID pro_id,UUID request_id) {
 		// TODO Auto-generated method stub
 //		UUID emp_id1 = UUID.fromString(emp_id);
 //		UUID pro_id1 = UUID.fromString(pro_id);
 //		UUID request_id1 = UUID.fromString(request_id);
-//		rfr.deleteRequest(emp_id1, pro_id1, request_id1);
-		cassandraTemplate.delete(request_form);
+		rfr.deleteRequest(emp_id, pro_id, request_id);
+	}
+	@Override
+	public List<Employee> getAllEmployeePaginated(int page, int size) {
+		List<Employee> list=er.findAll();
+		int from = Math.max(0,page*size);
+		int to = Math.min(list.size(),(page+1)*size);
+		return list.subList(from,to);
 	}
 }

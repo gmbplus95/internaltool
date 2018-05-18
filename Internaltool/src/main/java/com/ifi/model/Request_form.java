@@ -31,7 +31,16 @@ public class Request_form {
 	  	      type = PrimaryKeyType.CLUSTERED, 
 	  	      ordering = Ordering.ASCENDING)
 				private UUID request_id;
-	
+	@Column
+	private String description;
+	@Column
+	private String emp_name;
+	@Column
+	private LocalDate from_date;
+	@Column
+	private LocalDate to_date;
+	@Column
+	private UUID send_to;
 	@Column
     @CreatedDate
     private Date created_date;
@@ -39,22 +48,11 @@ public class Request_form {
     @LastModifiedDate
     private Date last_modified;
 	@Column
-	private String emp_name;
-	@Column
 	private String pro_name;
 	@Column
-	private LocalDate from_date;
-	@Column
-	private LocalDate to_date;
-	@Column
-	private String description;
+	private int status;
 	@Column
 	private int type;
-	@Column
-	private UUID send_to;
-	@Column
-	private int status;
-	
 	public UUID getEmp_id() {
 		return emp_id;
 	}
@@ -73,29 +71,17 @@ public class Request_form {
 	public void setRequest_id(UUID request_id) {
 		this.request_id = request_id;
 	}
-	public Date getCreated_date() {
-		return created_date;
+	public String getDescription() {
+		return description;
 	}
-	public void setCreated_date(Date created_date) {
-		this.created_date = created_date;
-	}
-	public Date getLast_modified() {
-		return last_modified;
-	}
-	public void setLast_modified(Date last_modified) {
-		this.last_modified = last_modified;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getEmp_name() {
 		return emp_name;
 	}
 	public void setEmp_name(String emp_name) {
 		this.emp_name = emp_name;
-	}
-	public String getPro_name() {
-		return pro_name;
-	}
-	public void setPro_name(String pro_name) {
-		this.pro_name = pro_name;
 	}
 	public LocalDate getFrom_date() {
 		return from_date;
@@ -109,17 +95,29 @@ public class Request_form {
 	public void setTo_date(LocalDate to_date) {
 		this.to_date = to_date;
 	}
-	public String getDescription() {
-		return description;
+	public UUID getSend_to() {
+		return send_to;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setSend_to(UUID send_to) {
+		this.send_to = send_to;
 	}
-	public int getType() {
-		return type;
+	public Date getCreated_date() {
+		return created_date;
 	}
-	public void setType(int type) {
-		this.type = type;
+	public void setCreated_date(Date created_date) {
+		this.created_date = created_date;
+	}
+	public Date getLast_modified() {
+		return last_modified;
+	}
+	public void setLast_modified(Date last_modified) {
+		this.last_modified = last_modified;
+	}
+	public String getPro_name() {
+		return pro_name;
+	}
+	public void setPro_name(String pro_name) {
+		this.pro_name = pro_name;
 	}
 	public int getStatus() {
 		return status;
@@ -127,33 +125,32 @@ public class Request_form {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public UUID getSend_to() {
-		return send_to;
+	public int getType() {
+		return type;
 	}
-	public void setSend_to(UUID send_to) {
-		this.send_to = send_to;
+	public void setType(int type) {
+		this.type = type;
 	}
 	public Request_form() {
 		super();
 	}
-	public Request_form(UUID emp_id, UUID pro_id, UUID request_id, Date created_date, Date last_modified,
-			String emp_name, String pro_name, LocalDate from_date, LocalDate to_date, String description, int type,
-			UUID send_to, int status) {
+	public Request_form(UUID emp_id, UUID pro_id, UUID request_id, String description, String emp_name,
+			LocalDate from_date, LocalDate to_date, UUID send_to, Date created_date, Date last_modified,
+			String pro_name, int status, int type) {
 		super();
 		this.emp_id = emp_id;
 		this.pro_id = pro_id;
 		this.request_id = request_id;
-		this.created_date = created_date;
-		this.last_modified = last_modified;
+		this.description = description;
 		this.emp_name = emp_name;
-		this.pro_name = pro_name;
 		this.from_date = from_date;
 		this.to_date = to_date;
-		this.description = description;
-		this.type = type;
 		this.send_to = send_to;
+		this.created_date = created_date;
+		this.last_modified = last_modified;
+		this.pro_name = pro_name;
 		this.status = status;
+		this.type = type;
 	}
-	
 	
 }

@@ -21,6 +21,7 @@ public interface AppService {
 	Employee getEmployeeByEmpid(UUID emp_id);		//lấy được emp dựa vào empid
 	Request_form getRequestFormBySendto(UUID send_to);//lấy request dựa vào send_to id
 	void addRequestForm(Request_form request_form);
-	void deleteRequest(Request_form request_form);
+	void deleteRequest(UUID emp_id,UUID pro_id,UUID request_id);
+	List<Employee> getAllEmployeePaginated(int start,int size);
 //	Set<UUID> getListSubid(UUID emp_id);
 }
