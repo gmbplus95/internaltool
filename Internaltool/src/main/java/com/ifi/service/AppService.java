@@ -23,5 +23,6 @@ public interface AppService {
 	void addRequestForm(Request_form request_form);
 	void deleteRequest(UUID emp_id,UUID pro_id,UUID request_id);
 	List<Employee> getAllEmployeePaginated(int start,int size);
+	Request_form getRequestByAllId(UUID emp_id,UUID pro_id,UUID request_id);
 //	Set<UUID> getListSubid(UUID emp_id);
 }

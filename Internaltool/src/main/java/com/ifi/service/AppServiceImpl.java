@@ -87,4 +87,8 @@ public class AppServiceImpl implements AppService {
 		int to = Math.min(list.size(),(page+1)*size);
 		return list.subList(from,to);
 	}
+	@Override
+	public Request_form getRequestByAllId(UUID emp_id, UUID pro_id, UUID request_id) {
+		return rfr.getRequestByAllId(emp_id, pro_id, request_id);
+	}
 }

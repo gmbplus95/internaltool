@@ -2,6 +2,7 @@ package com.ifi.model;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -40,9 +41,11 @@ public class Request_form {
 	@Column
 	private LocalDate to_date;
 	@Column
-	private UUID send_to;
+	private UUID next_approve_id;
 	@Column
-    @CreatedDate
+	private Set<UUID> approved_id;
+	@Column
+	@CreatedDate
     private Date created_date;
 	@Column
     @LastModifiedDate
@@ -95,11 +98,17 @@ public class Request_form {
 	public void setTo_date(LocalDate to_date) {
 		this.to_date = to_date;
 	}
-	public UUID getSend_to() {
-		return send_to;
+	public UUID getNext_approve_id() {
+		return next_approve_id;
 	}
-	public void setSend_to(UUID send_to) {
-		this.send_to = send_to;
+	public void setNext_approve_id(UUID next_approve_id) {
+		this.next_approve_id = next_approve_id;
+	}
+	public Set<UUID> getApproved_id() {
+		return approved_id;
+	}
+	public void setApproved_id(Set<UUID> approved_id) {
+		this.approved_id = approved_id;
 	}
 	public Date getCreated_date() {
 		return created_date;
@@ -135,8 +144,8 @@ public class Request_form {
 		super();
 	}
 	public Request_form(UUID emp_id, UUID pro_id, UUID request_id, String description, String emp_name,
-			LocalDate from_date, LocalDate to_date, UUID send_to, Date created_date, Date last_modified,
-			String pro_name, int status, int type) {
+			LocalDate from_date, LocalDate to_date, UUID next_approve_id, Set<UUID> approved_id, Date created_date,
+			Date last_modified, String pro_name, int status, int type) {
 		super();
 		this.emp_id = emp_id;
 		this.pro_id = pro_id;
@@ -145,12 +154,14 @@ public class Request_form {
 		this.emp_name = emp_name;
 		this.from_date = from_date;
 		this.to_date = to_date;
-		this.send_to = send_to;
+		this.next_approve_id = next_approve_id;
+		this.approved_id = approved_id;
 		this.created_date = created_date;
 		this.last_modified = last_modified;
 		this.pro_name = pro_name;
 		this.status = status;
 		this.type = type;
 	}
+	
 	
 }
