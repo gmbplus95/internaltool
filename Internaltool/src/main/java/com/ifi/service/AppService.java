@@ -3,6 +3,8 @@ package com.ifi.service;
 import java.util.List;
 import java.util.UUID;
 
+import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.Row;
 import com.ifi.model.Employee;
 import com.ifi.model.Project;
 import com.ifi.model.Request_form;

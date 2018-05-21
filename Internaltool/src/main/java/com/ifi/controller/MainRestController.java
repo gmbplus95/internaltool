@@ -232,11 +232,13 @@ public class MainRestController {
 	@RequestMapping(value = "/searchRequest")
 	public @ResponseBody Payload searchRequest(@Valid @RequestBody Search searchModel)
 	{
+		
 		Payload message = new Payload();
+		Object data=appService.searchRequest(searchModel);
 		message.setCode("Success code");
 		message.setStatus("OK");
 		message.setDescription("Search data successfully");
-		message.setData(appService.searchRequest(searchModel));
+		message.setData(data);
 		return message;
 	}
 

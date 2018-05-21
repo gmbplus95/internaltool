@@ -1,6 +1,7 @@
 package com.ifi.model;
 
 import java.time.LocalDate;
+//import com.datastax.driver.core.LocalDate;
 
 public class Search {
 	private String emp_name;
