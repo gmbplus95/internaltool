@@ -1,28 +1,22 @@
 package com.ifi.service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import com.datastax.driver.mapping.Mapper;
-import com.datastax.driver.mapping.MappingManager;
-import com.datastax.driver.mapping.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.cassandra.config.CassandraSessionFactoryBean;
-import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.stereotype.Service;
 
 import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.mapping.Mapper;
+import com.datastax.driver.mapping.MappingManager;
+import com.datastax.driver.mapping.Result;
 import com.ifi.model.Employee;
 import com.ifi.model.Project;
 import com.ifi.model.Request_form;
@@ -119,31 +113,30 @@ public class AppServiceImpl extends SelectWhere implements AppService {
 		if(searchModel.getEmp_name()!="")
 		{
 		keyValues.put("emp_name", searchModel.getEmp_name());
-		
-	     }
+	    }
 		if(searchModel.getPro_name()!="")
 		{
 			keyValues.put("pro_name", searchModel.getPro_name());
 		}
 		if(searchModel.getFrom_date()!=null)
 		{
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSz");
-			LocalDate dateTime = searchModel.getFrom_date();
-			String formattedDateTime = dateTime.format(formatter); 
-		keyValues.put("from_date",formattedDateTime);
+			com.datastax.driver.core.LocalDate a=this.convert(searchModel.getFrom_date());//convert sang localDate
+	    	 keyValues.put("from_date",a);
+		     
 		}
-////		
-//		if(searchModel.getTo_date()!=null)
-//		{
-//		keyValues.put("to_date", searchModel.getTo_date());
-//		}
+	
+		if(searchModel.getTo_date()!=null)
+		{
+		com.datastax.driver.core.LocalDate a=this.convert(searchModel.getTo_date());
+		keyValues.put("to_date", a);
+		}
 		
 		if(searchModel.getStatus()!=0)
 		{
 		keyValues.put("status", searchModel.getStatus());
 		}	
 		
-		com.datastax.driver.core.querybuilder.Select.Where a =super.getSelectStatement(keyValues);
+		com.datastax.driver.core.querybuilder.Select.Where a =super.getWhereStatement(keyValues);
 		com.datastax.driver.core.querybuilder.Select c=a.allowFiltering();
 		ResultSet b= nativeSessionObject.execute(c);
 		MappingManager manager = new MappingManager(nativeSessionObject);
@@ -154,6 +147,7 @@ public class AppServiceImpl extends SelectWhere implements AppService {
 		for (Request_form u : request_forms) {
 			request_list.add(u);
 		}
+		return request_list;//cach 1
 //		b.iterator().forEachRemaining(row ->  
 //		request_list.add(new Request_form(row.getUUID("emp_id"), 
 //										  row.getUUID("pro_id"),
@@ -171,13 +165,16 @@ public class AppServiceImpl extends SelectWhere implements AppService {
 //										  row.getInt("type")
 //										   
 //		                       )));
-		return request_list;
-		
-//		String emp_name=searchModel.getEmp_name();
-//		String pro_name=searchModel.getPro_name();
-//		LocalDate from_date=searchModel.getFrom_date();
-//		LocalDate to_date=searchModel.getTo_date();
-//		int status=searchModel.getStatus();
-//		return rfr.searchRequest1(emp_name, pro_name, from_date, to_date, status);
+//		return request_list;//cach 2
 	}
+	//convert tu java.time.LocalDate sang com.datastax.driver.core.LocalDate
+	public com.datastax.driver.core.LocalDate convert(LocalDate localDate) {
+		return com.datastax.driver.core.LocalDate.fromYearMonthDay(localDate.getYear(), localDate.getMonthValue(),
+				localDate.getDayOfMonth());
+	}
+	//convert tu com.datastax.driver.core.LocalDate sang java.time.LocalDate 
+	public LocalDate convert(com.datastax.driver.core.LocalDate localDate) {
+		return LocalDate.of(localDate.getYear(), localDate.getMonth(), localDate.getDay());
+	}
+
 }

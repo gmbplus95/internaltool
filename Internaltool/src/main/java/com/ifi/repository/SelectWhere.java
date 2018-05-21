@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 
 public class SelectWhere {
-	protected com.datastax.driver.core.querybuilder.Select.Where getSelectStatement(Map<String, Object> keyValues) {
+	protected com.datastax.driver.core.querybuilder.Select.Where getWhereStatement(Map<String, Object> keyValues) {
 		  List<String> keys = new ArrayList<>();
 		  List<Object> values = new ArrayList<>();
 		  for (Entry<String, Object> entry : keyValues.entrySet()) {
