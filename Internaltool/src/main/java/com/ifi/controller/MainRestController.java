@@ -27,6 +27,7 @@ import com.datastax.driver.core.utils.UUIDs;
 import com.ifi.model.Employee;
 import com.ifi.model.Project;
 import com.ifi.model.Request_form;
+import com.ifi.model.Search;
 import com.ifi.service.AppService;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -209,7 +210,7 @@ public class MainRestController {
 					e1.printStackTrace();
 				} // lấy time hiện tại đặt cho last_modified
 
-				appService.addRequestForm(request_data);
+				appService.addRequestForm(request_data);//lưu lại form sau khi update
 				message.setCode("Success code");
 				message.setStatus("OK");
 				message.setDescription("Updated data successfully");
@@ -225,6 +226,17 @@ public class MainRestController {
 			message.setDescription("Request form not found!");
 			message.setData("");
 		}
+		return message;
+	}
+	//search
+	@RequestMapping(value = "/searchRequest")
+	public @ResponseBody Payload searchRequest(@Valid @RequestBody Search searchModel)
+	{
+		Payload message = new Payload();
+		message.setCode("Success code");
+		message.setStatus("OK");
+		message.setDescription("Search data successfully");
+		message.setData(appService.searchRequest(searchModel));
 		return message;
 	}
 

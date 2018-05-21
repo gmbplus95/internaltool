@@ -1,6 +1,6 @@
 package com.ifi.service;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ifi.model.Employee;
 import com.ifi.model.Project;
 import com.ifi.model.Request_form;
+import com.ifi.model.Search;
 import com.ifi.repository.EmployeeRepository;
 import com.ifi.repository.ProjectRepository;
 import com.ifi.repository.RequestFormRepository;
@@ -45,7 +46,7 @@ public class AppServiceImpl implements AppService {
 	}
 	@Override
 	public List<Request_form> getAllRequest() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stuber
 		return rfr.findAllRequest();
 	}
 	@Override
@@ -90,5 +91,15 @@ public class AppServiceImpl implements AppService {
 	@Override
 	public Request_form getRequestByAllId(UUID emp_id, UUID pro_id, UUID request_id) {
 		return rfr.getRequestByAllId(emp_id, pro_id, request_id);
+	}
+	@Override
+	public List<Request_form> searchRequest(Search searchModel) {
+		// TODO Auto-generated method stub
+		String emp_name=searchModel.getEmp_name();
+		String pro_name=searchModel.getPro_name();
+		LocalDate from_date=searchModel.getFrom_date();
+		LocalDate to_date=searchModel.getTo_date();
+		int status=searchModel.getStatus();
+		return rfr.searchRequest1(emp_name, pro_name, from_date, to_date, status);
 	}
 }
